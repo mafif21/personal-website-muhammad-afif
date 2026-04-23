@@ -49,7 +49,7 @@ export function TypingHeadline({ prefix, rotatingWords, className }: TypingHeadl
           setWordIndex((current) => (current + 1) % rotatingWords.length);
         }
       },
-      !isDeleting && isWordComplete ? 1100 : isDeleting ? 40 : 70
+      !isDeleting && isWordComplete ? 1400 : isDeleting ? 35 : 70
     );
 
     return () => window.clearTimeout(timeout);
@@ -60,12 +60,21 @@ export function TypingHeadline({ prefix, rotatingWords, className }: TypingHeadl
 
   return (
     <h1 className={className} aria-live="polite">
-      <span>{prefix} </span>
-      <span className="text-primary">{visibleWord}</span>
-      <span
-        aria-hidden
-        className="ml-1 inline-block h-[1em] w-[2px] animate-pulse bg-primary align-[-0.1em]"
-      />
+      <span className="block text-foreground">{prefix}</span>
+      <span className="mt-1 block">
+        <span
+          className="gradient-text bg-[length:200%_200%] animate-gradient-shift"
+          style={{
+            backgroundImage: "var(--brand-gradient)"
+          }}
+        >
+          {visibleWord}
+        </span>
+        <span
+          aria-hidden
+          className="ml-1 inline-block h-[0.9em] w-[3px] translate-y-[0.1em] animate-pulse rounded-sm bg-gradient-to-b from-primary to-accent"
+        />
+      </span>
     </h1>
   );
 }
